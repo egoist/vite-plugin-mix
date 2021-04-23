@@ -10,6 +10,7 @@ specifiers:
   '@types/polka': ^0.5.2
   esbuild: ^0.11.13
   jest: ^26.6.3
+  joycon: ^3.0.1
   polka: ^0.5.2
   prettier: ^2.2.1
   rollup: ^2.45.2
@@ -31,6 +32,7 @@ devDependencies:
   '@types/jest': 26.0.20
   '@types/polka': 0.5.2
   jest: 26.6.3
+  joycon: 3.0.1
   polka: 0.5.2
   prettier: 2.2.1
   rollup: 2.45.2
@@ -2546,6 +2548,11 @@ packages:
       - supports-color
       - ts-node
       - utf-8-validate
+    dev: true
+
+  /joycon/3.0.1:
+    resolution: {integrity: sha512-SJcJNBg32dGgxhPtM0wQqxqV0ax9k/9TaUskGDSJkSFSQOEWWvQ3zzWdGQRIUry2j1zA5+ReH13t0Mf3StuVZA==}
+    engines: {node: '>=10'}
     dev: true
 
   /js-tokens/4.0.0:

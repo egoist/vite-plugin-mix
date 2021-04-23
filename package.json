@@ -29,6 +29,7 @@
     "@types/jest": "^26.0.20",
     "@types/polka": "^0.5.2",
     "jest": "^26.6.3",
+    "joycon": "^3.0.1",
     "polka": "^0.5.2",
     "prettier": "^2.2.1",
     "rollup": "^2.45.2",
