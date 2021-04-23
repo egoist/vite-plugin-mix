@@ -93,7 +93,7 @@ const compression = createCompression()
 export const handler = [compression]
 ```
 
-`handler` could be a single middleware of an array of middlewares.
+`handler` could be a single middleware or an array of middlewares.
 
 ## Using Apollo GraphQL
 
