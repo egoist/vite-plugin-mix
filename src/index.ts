@@ -2,7 +2,6 @@ import fs from 'fs'
 import path from 'path'
 import { Plugin, build } from 'vite'
 import polka from 'polka'
-import { copyDir } from './fs'
 import { nodeAdapter } from './adapters/node'
 import { Adapter } from './types'
 
@@ -27,8 +26,6 @@ export default ({
   return {
     name: 'mix',
 
-    config() {},
-
     configResolved(config) {
       root = config.root
       clientOutDir = path.resolve(root, config.build.outDir)
@@ -42,7 +39,11 @@ export default ({
           const server = polka({
             onNoMatch: () => next(),
           })
-          server.use(mod.handler)
+          if (Array.isArray(mod.handler)) {
+            mod.handler.forEach((handler) => server.use(handler))
+          } else {
+            server.use(mod.handler)
+          }
           server.handler(req as any, res)
         } catch (error) {
           devServer.ssrFixStacktrace(error)
@@ -59,10 +60,7 @@ export default ({
 
       adapter = adapter || nodeAdapter()
 
-      const runtimeDir = path.join(root, 'build/.runtime')
       const serverOutDir = path.join(root, 'build')
-
-      await copyDir(path.join(__dirname, 'runtime'), runtimeDir)
 
       const handlerFile = getHandlerFile()
 

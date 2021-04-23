@@ -6,6 +6,10 @@
 
 [![npm version](https://badgen.net/npm/v/vite-plugin-mix)](https://npm.im/vite-plugin-mix)
 
+## Motivation
+
+Writing front-end and back-end API in a single project allows faster development (imo), this plugin is similar to what Next.js does but this plugin doesn't do server-side rendering for your front-end app.
+
 ## Install
 
 ```bash
@@ -42,7 +46,7 @@ export const handler: Handler = (req, res, next) => {
 }
 ```
 
-The `handler` runs before serving static files, so you should make sure to call `next()` as a fallback.
+The `handler` runs before serving static files, so you should make sure to call `next()` as a fallback. You can also use express-compatible middlewares in the handler.
 
 To start developing, run the command `vite` as usual.
 
@@ -75,6 +79,42 @@ export default defineConfig({
 ```
 
 Then you can run `vite build` to build for Vercel.
+
+## Guide
+
+### Using express middlewares
+
+```ts
+// For example: using the compression middleware
+
+import createCompression from 'compression'
+
+const compression = createCompression()
+export const handler = [compression]
+```
+
+`handler` could be a single middleware of an array of middlewares.
+
+## Using Apollo GraphQL
+
+```ts
+import { ApolloServer } from 'apollo-server-micro'
+import { typeDefs } from './schemas'
+import { resolvers } from './resolvers'
+
+const apolloServer = new ApolloServer({ typeDefs, resolvers })
+
+const GRAPHQL_ENDPOINT = '/api/graphql'
+
+const apolloHandler = apolloServer.createHandler({ path: GRAPHQL_ENDPOINT })
+
+export const handler = (req, res, next) => {
+  if (req.path === '/api/graphql') {
+    return apolloHandler
+  }
+  next()
+}
+```
 
 ## License
 
