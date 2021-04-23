@@ -1,6 +1,6 @@
 import { Handler } from '..'
 
-export const serverIndex: Handler = (req, res) => {
+export const serveIndex: Handler = (req, res) => {
   res.setHeader('Content-Type', 'text/html')
   res.end(import.meta.env.MIX_HTML)
 }

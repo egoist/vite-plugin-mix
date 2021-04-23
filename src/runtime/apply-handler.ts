@@ -1,5 +1,5 @@
 import { handler } from '$handler_file'
-import { serverIndex } from './serve-index'
+import { serveIndex } from './serve-index'
 
 export const applyHandler = (server: any) => {
   if (Array.isArray(handler)) {
@@ -7,5 +7,5 @@ export const applyHandler = (server: any) => {
   } else {
     server.use(handler)
   }
-  server.use(serverIndex)
+  server.use(serveIndex)
 }
