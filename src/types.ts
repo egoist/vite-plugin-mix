@@ -35,3 +35,19 @@ export type Response = ServerResponse
 export type NextFunction = (err?: Error) => void
 
 export type Handler = (req: Request, res: Response, next: NextFunction) => any
+
+type BuildOpts = {
+  root: string
+  serverOutDir: string
+  clientOutDir: string
+}
+
+export type Adapter = {
+  name: string
+
+  rollupInput?: Record<string, string | string[]>
+
+  buildStart?: (opts: BuildOpts) => Promise<void> | void
+
+  buildEnd?: (opts: BuildOpts) => Promise<void> | void
+}

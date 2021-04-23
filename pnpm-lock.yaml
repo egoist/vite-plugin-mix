@@ -8,6 +8,7 @@ specifiers:
   '@sucrase/jest-plugin': ^2.0.0
   '@types/jest': ^26.0.20
   '@types/polka': ^0.5.2
+  esbuild: ^0.11.13
   jest: ^26.6.3
   polka: ^0.5.2
   prettier: ^2.2.1
@@ -17,6 +18,9 @@ specifiers:
   tiny-glob: ^0.2.8
   typescript: ^4.2.3
   vite: ^2.2.1
+
+dependencies:
+  esbuild: 0.11.13
 
 devDependencies:
   '@egoist/prettier-config': 0.1.0
@@ -1448,6 +1452,12 @@ packages:
     dependencies:
       is-arrayish: 0.2.1
     dev: true
+
+  /esbuild/0.11.13:
+    resolution: {integrity: sha512-d5coY4dd4rVWle0WzrR8+32ukKtZroVJ/wJzOwbBEmoSFB/H3QME0l+3IAN5Sf3LtuoUSivdv1/b5rD7OykXeg==}
+    hasBin: true
+    requiresBuild: true
+    dev: false
 
   /esbuild/0.9.7:
     resolution: {integrity: sha512-VtUf6aQ89VTmMLKrWHYG50uByMF4JQlVysb8dmg6cOgW8JnFCipmz7p+HNBl+RR3LLCuBxFGVauAe2wfnF9bLg==}

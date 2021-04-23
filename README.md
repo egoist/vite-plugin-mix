@@ -50,6 +50,32 @@ To create a production build, run the command `vite build` as usual.
 
 Now `vite build` will create a server build to `./build` folder alongside your regular client build which is the `./dist` folder by default. To run the production build as a Node.js server, run `node build/server.js`.
 
+## Adapters
+
+### Node.js
+
+By default the server is built for Node.js target, you can run `node build/server.js` after `vite build` to start the production server.
+
+### Vercel
+
+To build for [Vercel](https://vercel.com), use the `vercelAdapter` in `vite.config.ts`:
+
+```ts
+import { defineConfig } from 'vite'
+import mix, { vercelAdapter } from 'vite-plugin-mix'
+
+export default defineConfig({
+  plugins: [
+    mix({
+      handler: './handler.ts',
+      adapter: vercelAdapter(),
+    }),
+  ],
+})
+```
+
+Then you can run `vite build` to build for Vercel.
+
 ## License
 
 MIT &copy; [EGOIST](https://github.com/sponsors/egoist)

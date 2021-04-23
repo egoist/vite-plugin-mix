@@ -40,5 +40,8 @@
   },
   "peerDependencies": {
     "vite": "^2.2.1"
+  },
+  "dependencies": {
+    "esbuild": "^0.11.13"
   }
 }

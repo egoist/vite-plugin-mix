@@ -22,3 +22,13 @@ export const copyDir = async (fromDir: string, toDir: string) => {
     }),
   )
 }
+
+export const outputFile = async (filepath: string, data: string | Buffer) => {
+  await mkdirp(path.dirname(filepath))
+  await fs.promises.writeFile(filepath, data)
+}
+export const moveFile = async (fromPath: string, toPath: string) => {
+  await mkdirp(path.dirname(toPath))
+  await fs.promises.copyFile(fromPath, toPath)
+  await fs.promises.unlink(fromPath)
+}

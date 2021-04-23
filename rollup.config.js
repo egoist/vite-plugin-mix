@@ -32,7 +32,7 @@ const configs = [
     plugins: [dts()],
   },
   {
-    input: ['./src/runtime/server.js'],
+    input: ['./src/runtime/server.js', './src/runtime/vercel-render.js'],
     output: {
       format: 'esm',
       dir: './dist/runtime',

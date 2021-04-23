@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite'
-import mix from '..'
+import mix, { vercelAdapter } from '..'
 
 export default defineConfig({
-  plugins: [mix({ handler: './handler.ts' })],
+  plugins: [mix({ handler: './handler.ts', adapter: vercelAdapter() })],
 })

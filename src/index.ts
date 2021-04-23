@@ -1,11 +1,24 @@
+import fs from 'fs'
 import path from 'path'
 import { Plugin, build } from 'vite'
 import polka from 'polka'
-import { copyDir } from './fs'
+import { copyDir, moveFile } from './fs'
+import { nodeAdapter } from './adapters/node'
+import { Adapter } from './types'
 
 export * from './types'
 
-export default ({ handler }: { handler: string }): Plugin => {
+export { nodeAdapter }
+
+export { vercelAdapter } from './adapters/vercel'
+
+export default ({
+  handler,
+  adapter,
+}: {
+  handler: string
+  adapter?: Adapter
+}): Plugin => {
   let root = process.cwd()
   let clientOutDir: string | undefined
 
@@ -44,12 +57,25 @@ export default ({ handler }: { handler: string }): Plugin => {
 
       process.env.MIX_SSR_BUILD = 'true'
 
+      adapter = adapter || nodeAdapter()
+
       const runtimeDir = path.join(root, 'build/.runtime')
       const serverOutDir = path.join(root, 'build')
 
       await copyDir(path.join(__dirname, 'runtime'), runtimeDir)
 
       const handlerFile = getHandlerFile()
+
+      const buildOpts = { root, serverOutDir, clientOutDir: clientOutDir! }
+
+      if (adapter.buildStart) {
+        await adapter.buildStart(buildOpts)
+      }
+
+      const indexHtmlPath = path.join(clientOutDir!, 'index.html')
+      const indexHtml = fs.readFileSync(indexHtmlPath, 'utf8')
+      fs.unlinkSync(indexHtmlPath)
+
       await build({
         root,
         resolve: {
@@ -58,9 +84,10 @@ export default ({ handler }: { handler: string }): Plugin => {
           },
         },
         define: {
-          CLIENT_DIR: JSON.stringify(
+          'import.meta.env.MIX_CLIENT_DIR': JSON.stringify(
             path.relative(process.cwd(), clientOutDir!),
           ),
+          'import.meta.env.MIX_HTML': JSON.stringify(indexHtml),
         },
         build: {
           outDir: serverOutDir,
@@ -69,11 +96,15 @@ export default ({ handler }: { handler: string }): Plugin => {
           rollupOptions: {
             input: {
               handler: handlerFile,
-              server: path.join(runtimeDir, 'server.js'),
+              ...adapter.rollupInput,
             },
           },
         },
       })
+
+      if (adapter.buildEnd) {
+        await adapter.buildEnd(buildOpts)
+      }
     },
   }
 }
