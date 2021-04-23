@@ -33,6 +33,10 @@ export const vercelAdapter = (): Adapter => {
         target: `node${process.version.slice(1)}`,
         outfile: functionOutPath,
         bundle: true,
+        external: [
+          // Seems likes a Node.js internal module, used by @prisma/client
+          '_http_common',
+        ],
       })
 
       // copy static folder
