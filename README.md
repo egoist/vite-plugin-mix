@@ -8,7 +8,7 @@
 
 ## Motivation
 
-Writing front-end and back-end API in a single project allows faster development (imo), this plugin is similar to what Next.js does but this plugin doesn't do server-side rendering for your front-end app.
+Writing front-end and back-end API in a single project allows faster development (imo), this plugin is similar to what Next.js does but without doing server-side rendering for your front-end app.
 
 ## Install
 
