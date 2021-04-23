@@ -2,7 +2,7 @@ import fs from 'fs'
 import path from 'path'
 import { Plugin, build } from 'vite'
 import polka from 'polka'
-import { copyDir, moveFile } from './fs'
+import { copyDir } from './fs'
 import { nodeAdapter } from './adapters/node'
 import { Adapter } from './types'
 
