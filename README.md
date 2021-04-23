@@ -60,6 +60,8 @@ Now `vite build` will create a server build to `./build` folder alongside your r
 
 By default the server is built for Node.js target, you can run `node build/server.js` after `vite build` to start the production server.
 
+By default the server runs at port `3000`, you can switch to a custom port by using the `PORT` environment variable.
+
 ### Vercel
 
 To build for [Vercel](https://vercel.com), use the `vercelAdapter` in `vite.config.ts`:
