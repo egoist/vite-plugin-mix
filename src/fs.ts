@@ -11,6 +11,19 @@ export async function mkdirp(dir: string) {
   }
 }
 
+export const copy = async (fromPath: string, toPath: string) => {
+  const stat = await fs.promises.stat(fromPath)
+  if (stat.isDirectory()) {
+    return copyDir(fromPath, toPath)
+  }
+  return copyFile(fromPath, toPath)
+}
+
+export const copyFile = async (fromFile: string, toFile: string) => {
+  await mkdirp(path.dirname(toFile))
+  await fs.promises.copyFile(fromFile, toFile)
+}
+
 export const copyDir = async (fromDir: string, toDir: string) => {
   const files = await glob('**/*', { cwd: fromDir, filesOnly: true })
   await Promise.all(
