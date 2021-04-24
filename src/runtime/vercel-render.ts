@@ -5,4 +5,4 @@ const server = polka()
 
 applyHandler(server)
 
-export default server.handler
+export default (req: any, res: any) => server.handler(req, res)

@@ -1,7 +1,7 @@
 import path from 'path'
-import { build } from 'esbuild'
+import { nodeFileTrace } from '@vercel/nft'
 import { Adapter } from '..'
-import { copyDir, outputFile } from '../fs'
+import { copy, copyDir, moveFile, outputFile } from '../fs'
 
 export const vercelAdapter = (): Adapter => {
   return {
@@ -25,19 +25,24 @@ export const vercelAdapter = (): Adapter => {
       )
 
       // build vercel function
-      const functionOutPath = path.join(dir, 'functions/node/render/index.js')
-      await build({
-        entryPoints: [path.join(serverOutDir, 'render.js')],
-        format: 'cjs',
-        platform: 'node',
-        target: `node${process.version.slice(1)}`,
-        outfile: functionOutPath,
-        bundle: true,
-        external: [
-          // Seems likes a Node.js internal module, used by @prisma/client
-          '_http_common',
-        ],
-      })
+      const functionDir = path.join(dir, 'functions/node/render')
+      copyDir(serverOutDir, functionDir)
+      moveFile(
+        path.join(functionDir, 'render.js'),
+        path.join(functionDir, 'index.js'),
+      )
+
+      const traceResult = await nodeFileTrace([
+        path.join(functionDir, 'render.js'),
+      ])
+
+      await Promise.all(
+        traceResult.fileList.map(async (file) => {
+          if (!file.includes('node_modules')) return
+          const outFile = path.join(functionDir, file)
+          await copy(file, outFile)
+        }),
+      )
 
       // copy static folder
       await copyDir(clientOutDir, path.join(dir, 'static'))
