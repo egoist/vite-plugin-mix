@@ -97,7 +97,7 @@ export const handler = [compression]
 
 `handler` could be a single middleware or an array of middlewares.
 
-## Using Apollo GraphQL
+### Using Apollo GraphQL
 
 ```ts
 import { ApolloServer } from 'apollo-server-micro'
