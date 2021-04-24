@@ -1,6 +1,8 @@
 import { ServerResponse, IncomingMessage } from 'http'
+import { ViteDevServer } from 'vite'
 
 export interface Request extends IncomingMessage {
+  viteServer?: ViteDevServer
   /**
    * The originally-requested URL, including parent router segments.
    */

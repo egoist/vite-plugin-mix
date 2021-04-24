@@ -39,6 +39,11 @@ export default ({
           const server = polka({
             onNoMatch: () => next(),
           })
+          server.use((req, res, next) => {
+            // @ts-expect-error
+            req.viteServer = devServer
+            next()
+          })
           if (Array.isArray(mod.handler)) {
             mod.handler.forEach((handler) => server.use(handler))
           } else {
