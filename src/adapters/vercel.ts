@@ -12,9 +12,10 @@ export const vercelAdapter = (): Adapter => {
     },
 
     async buildEnd({ root, serverOutDir, clientOutDir }) {
-      const dir = path.join(root, '.vercel_build_output')
+      const vercelDir = path.join(root, '.vercel_build_output')
+
       await outputFile(
-        path.join(dir, 'config/routes.json'),
+        path.join(vercelDir, 'config/routes.json'),
         JSON.stringify([
           { handle: 'filesystem' },
           {
@@ -25,15 +26,15 @@ export const vercelAdapter = (): Adapter => {
       )
 
       // build vercel function
-      const functionDir = path.join(dir, 'functions/node/render')
-      copyDir(serverOutDir, functionDir)
-      moveFile(
+      const functionDir = path.join(vercelDir, 'functions/node/render')
+      await copyDir(serverOutDir, functionDir)
+      await moveFile(
         path.join(functionDir, 'render.js'),
         path.join(functionDir, 'index.js'),
       )
 
       const traceResult = await nodeFileTrace([
-        path.join(functionDir, 'render.js'),
+        path.join(functionDir, 'index.js'),
       ])
 
       await Promise.all(
@@ -45,7 +46,7 @@ export const vercelAdapter = (): Adapter => {
       )
 
       // copy static folder
-      await copyDir(clientOutDir, path.join(dir, 'static'))
+      await copyDir(clientOutDir, path.join(vercelDir, 'static'))
     },
   }
 }
