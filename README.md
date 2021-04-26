@@ -89,18 +89,31 @@ Then you can run `vite build` to build for Vercel.
 
 ## Guide
 
-### Using express middlewares
+### Using Express
 
 ```ts
-// For example: using the compression middleware
+import express from 'express'
 
-import createCompression from 'compression'
+const app = express()
 
-const compression = createCompression()
-export const handler = [compression]
+export const handler = app
 ```
 
-`handler` could be a single middleware or an array of middlewares.
+### Using Polka
+
+```ts
+import polka from 'polka'
+
+let app
+
+export const handler = (req, res, next) => {
+   app = app || polka({
+     onNoMatch: () => next()
+   })
+   
+   return app.handler(req, res)
+}
+```
 
 ### Using Apollo GraphQL
 
@@ -122,6 +135,8 @@ export const handler = (req, res, next) => {
   next()
 }
 ```
+
+You can also use `express` + `apollo-server-express` if you want.
 
 ## License
 
