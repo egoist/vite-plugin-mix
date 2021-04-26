@@ -104,10 +104,9 @@ export const handler = app
 ```ts
 import polka from 'polka'
 
-let app
 
 export const handler = (req, res, next) => {
-   app = app || polka({
+   const app = polka({
      onNoMatch: () => next()
    })
    
