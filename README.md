@@ -54,6 +54,11 @@ To create a production build, run the command `vite build` as usual.
 
 Now `vite build` will create a server build to `./build` folder alongside your regular client build which is the `./dist` folder by default. To run the production build as a Node.js server, run `node build/server.js`.
 
+### Request flow
+
+<img src="https://user-images.githubusercontent.com/8784712/116026214-d424af80-a684-11eb-9126-b188d7976be2.png" width="300" alt="request flow">
+
+
 ## Adapters
 
 ### Node.js
@@ -84,18 +89,30 @@ Then you can run `vite build` to build for Vercel.
 
 ## Guide
 
-### Using express middlewares
+### Using Express
 
 ```ts
-// For example: using the compression middleware
+import express from 'express'
 
-import createCompression from 'compression'
+const app = express()
 
-const compression = createCompression()
-export const handler = [compression]
+export const handler = app
 ```
 
-`handler` could be a single middleware or an array of middlewares.
+### Using Polka
+
+```ts
+import polka from 'polka'
+
+
+export const handler = (req, res, next) => {
+   const app = polka({
+     onNoMatch: () => next()
+   })
+   
+   return app.handler(req, res)
+}
+```
 
 ### Using Apollo GraphQL
 
@@ -117,6 +134,8 @@ export const handler = (req, res, next) => {
   next()
 }
 ```
+
+You can also use `express` + `apollo-server-express` if you want.
 
 ## License
 
