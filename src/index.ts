@@ -52,8 +52,8 @@ export default ({
           server.handler(req as any, res)
         } catch (error) {
           devServer.ssrFixStacktrace(error)
-          console.error(error)
           process.exitCode = 1
+          next(error)
         }
       })
     },
