@@ -1,7 +1,7 @@
 lockfileVersion: 5.3
 
 specifiers:
-  '@egoist/prettier-config': ^0.1.0
+  '@egoist/prettier-config': 1.0.0
   '@rollup/plugin-commonjs': ^18.0.0
   '@rollup/plugin-node-resolve': ^11.2.1
   '@rollup/plugin-sucrase': ^3.1.0
@@ -24,7 +24,7 @@ dependencies:
   '@vercel/nft': 0.10.1
 
 devDependencies:
-  '@egoist/prettier-config': 0.1.0
+  '@egoist/prettier-config': 1.0.0
   '@rollup/plugin-commonjs': 18.0.0_rollup@2.45.2
   '@rollup/plugin-node-resolve': 11.2.1_rollup@2.45.2
   '@rollup/plugin-sucrase': 3.1.0_rollup@2.45.2
@@ -363,8 +363,8 @@ packages:
       minimist: 1.2.5
     dev: true
 
-  /@egoist/prettier-config/0.1.0:
-    resolution: {integrity: sha512-BYeixvJcTY/jOgawCgFOBxYBPP0e1WQPiyZw98BsUEjSI5SbdAguRKodqcyT50wie+HGk1EuhGUzC3lfrKL4Vg==}
+  /@egoist/prettier-config/1.0.0:
+    resolution: {integrity: sha512-D1Tp9Jv4aVoEo3cOAO966gFCI0wx/1lZ6sEHX8uMAfyVxuxD2+knGxhfGlb/FNLxWV3ifSI5hOmB/zFfsi7Rzw==}
     dev: true
 
   /@istanbuljs/load-nyc-config/1.1.0:
@@ -1816,6 +1816,7 @@ packages:
     resolution: {integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==}
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
     os: [darwin]
+    requiresBuild: true
     dev: true
     optional: true
 
@@ -3075,6 +3076,7 @@ packages:
 
   /node-notifier/8.0.2:
     resolution: {integrity: sha512-oJP/9NAdd9+x2Q+rfphB2RJCHjod70RcRLjosiPMMu5gjIfwVnOUGq2nbTjTUbmy0DJ/tFIVT30+Qe3nzl4TJg==}
+    requiresBuild: true
     dependencies:
       growly: 1.3.0
       is-wsl: 2.2.0
