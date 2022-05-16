@@ -4,7 +4,7 @@ specifiers:
   '@egoist/prettier-config': ^0.1.0
   '@rollup/plugin-commonjs': ^18.0.0
   '@rollup/plugin-node-resolve': ^11.2.1
-  '@rollup/plugin-sucrase': ^3.1.0
+  '@rollup/plugin-sucrase': 4.0.4
   '@sucrase/jest-plugin': ^2.0.0
   '@types/jest': ^26.0.20
   '@types/polka': ^0.5.2
@@ -27,7 +27,7 @@ devDependencies:
   '@egoist/prettier-config': 0.1.0
   '@rollup/plugin-commonjs': 18.0.0_rollup@2.45.2
   '@rollup/plugin-node-resolve': 11.2.1_rollup@2.45.2
-  '@rollup/plugin-sucrase': 3.1.0_rollup@2.45.2
+  '@rollup/plugin-sucrase': 4.0.4_rollup@2.45.2
   '@sucrase/jest-plugin': 2.0.0
   '@types/jest': 26.0.20
   '@types/polka': 0.5.2
@@ -208,6 +208,8 @@ packages:
     resolution: {integrity: sha512-PhuoqeHoO9fc4ffMEVk4qb/w/s2iOSWohvbHxLtxui0eBg3Lg5gN1U8wp1V1u61hOWkPQJJyJzGH6Y+grwkq8Q==}
     engines: {node: '>=6.0.0'}
     hasBin: true
+    dependencies:
+      '@babel/types': 7.13.0
     dev: true
 
   /@babel/plugin-syntax-async-generators/7.8.4_@babel+core@7.13.10:
@@ -609,15 +611,15 @@ packages:
       rollup: 2.45.2
     dev: true
 
-  /@rollup/plugin-sucrase/3.1.0_rollup@2.45.2:
-    resolution: {integrity: sha512-PZ70LDNgIj8rL+3pKwKwTBOQ2c9JofXeLbWz+2V4/nCt4LqwYTNqxJJf1riTJsVARVzJdA0woIzUzjKZvL8TfA==}
-    engines: {node: '>=8.0.0'}
+  /@rollup/plugin-sucrase/4.0.4_rollup@2.45.2:
+    resolution: {integrity: sha512-YH4J8yoJb5EVnLhAwWxYAQNh2SJOR+SdZ6XdgoKEv6Kxm33riYkM8MlMaggN87UoISP52qAFyZ5ey56wu6umGg==}
+    engines: {node: '>=12.0.0'}
     peerDependencies:
-      rollup: ^1.20.0 || ^2.0.0
+      rollup: ^2.53.1
     dependencies:
-      '@rollup/pluginutils': 3.1.0_rollup@2.45.2
+      '@rollup/pluginutils': 4.2.1
       rollup: 2.45.2
-      sucrase: 3.18.1
+      sucrase: 3.21.0
     dev: true
 
   /@rollup/pluginutils/3.1.0_rollup@2.45.2:
@@ -630,6 +632,14 @@ packages:
       estree-walker: 1.0.1
       picomatch: 2.2.3
       rollup: 2.45.2
+    dev: true
+
+  /@rollup/pluginutils/4.2.1:
+    resolution: {integrity: sha512-iKnFXr7NkdZAIHiIWE+BX5ULi/ucVFYWD6TbAV+rZctiRTY2PL6tsIKhoIOaoskiWAkgu+VsbXgUVDNLHf+InQ==}
+    engines: {node: '>= 8.0.0'}
+    dependencies:
+      estree-walker: 2.0.2
+      picomatch: 2.2.3
     dev: true
 
   /@sinonjs/commons/1.8.2:
@@ -831,6 +841,8 @@ packages:
       node-pre-gyp: 0.13.0
       resolve-from: 5.0.0
       rollup-pluginutils: 2.8.2
+    transitivePeerDependencies:
+      - supports-color
     dev: false
 
   /abab/2.0.5:
@@ -949,6 +961,8 @@ packages:
     dependencies:
       micromatch: 3.1.10
       normalize-path: 2.1.1
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /anymatch/3.1.1:
@@ -956,7 +970,7 @@ packages:
     engines: {node: '>= 8'}
     dependencies:
       normalize-path: 3.0.0
-      picomatch: 2.2.2
+      picomatch: 2.2.3
     dev: true
 
   /aproba/1.2.0:
@@ -1151,6 +1165,8 @@ packages:
       snapdragon-node: 2.1.1
       split-string: 3.1.0
       to-regex: 3.0.2
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /braces/3.0.2:
@@ -1428,12 +1444,22 @@ packages:
 
   /debug/2.6.9:
     resolution: {integrity: sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA==}
+    peerDependencies:
+      supports-color: '*'
+    peerDependenciesMeta:
+      supports-color:
+        optional: true
     dependencies:
       ms: 2.0.0
     dev: true
 
   /debug/3.2.7:
     resolution: {integrity: sha512-CFjzYYAi4ThfiQvizrFQevTTXHtnCqWfe7x1AhgEscTz6ZbLbfoLRLPugTQyBth6f8ZERVUSyWHFD/7Wu4t1XQ==}
+    peerDependencies:
+      supports-color: '*'
+    peerDependenciesMeta:
+      supports-color:
+        optional: true
     dependencies:
       ms: 2.1.3
     dev: false
@@ -1680,6 +1706,8 @@ packages:
       regex-not: 1.0.2
       snapdragon: 0.8.2
       to-regex: 3.0.2
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /expect/26.6.2:
@@ -1725,6 +1753,8 @@ packages:
       regex-not: 1.0.2
       snapdragon: 0.8.2
       to-regex: 3.0.2
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /extsprintf/1.3.0:
@@ -1816,6 +1846,7 @@ packages:
     resolution: {integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==}
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
     os: [darwin]
+    requiresBuild: true
     dev: true
     optional: true
 
@@ -2421,6 +2452,8 @@ packages:
       walker: 1.0.7
     optionalDependencies:
       fsevents: 2.3.2
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /jest-jasmine2/26.6.3:
@@ -2518,6 +2551,8 @@ packages:
       '@jest/types': 26.6.2
       jest-regex-util: 26.0.0
       jest-snapshot: 26.6.2
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /jest-resolve/26.6.2:
@@ -2634,6 +2669,8 @@ packages:
       natural-compare: 1.4.0
       pretty-format: 26.6.2
       semver: 7.3.4
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /jest-util/26.6.2:
@@ -2921,6 +2958,8 @@ packages:
       regex-not: 1.0.2
       snapdragon: 0.8.2
       to-regex: 3.0.2
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /micromatch/4.0.2:
@@ -2928,7 +2967,7 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       braces: 3.0.2
-      picomatch: 2.2.2
+      picomatch: 2.2.3
     dev: true
 
   /micromatch/4.0.4:
@@ -3039,6 +3078,8 @@ packages:
       regex-not: 1.0.2
       snapdragon: 0.8.2
       to-regex: 3.0.2
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /natural-compare/1.4.0:
@@ -3053,6 +3094,8 @@ packages:
       debug: 3.2.7
       iconv-lite: 0.4.24
       sax: 1.2.4
+    transitivePeerDependencies:
+      - supports-color
     dev: false
 
   /nice-try/1.0.5:
@@ -3075,6 +3118,7 @@ packages:
 
   /node-notifier/8.0.2:
     resolution: {integrity: sha512-oJP/9NAdd9+x2Q+rfphB2RJCHjod70RcRLjosiPMMu5gjIfwVnOUGq2nbTjTUbmy0DJ/tFIVT30+Qe3nzl4TJg==}
+    requiresBuild: true
     dependencies:
       growly: 1.3.0
       is-wsl: 2.2.0
@@ -3100,6 +3144,8 @@ packages:
       rimraf: 2.7.1
       semver: 5.7.1
       tar: 4.4.13
+    transitivePeerDependencies:
+      - supports-color
     dev: false
 
   /node-releases/1.1.71:
@@ -3330,11 +3376,6 @@ packages:
 
   /performance-now/2.1.0:
     resolution: {integrity: sha1-Ywn04OX6kT7BxpMHrjZLSzd8nns=}
-    dev: true
-
-  /picomatch/2.2.2:
-    resolution: {integrity: sha512-q0M/9eZHzmr0AulXyPwNfZjtwZ/RBZlbN3K3CErVrk50T2ASYI7Bye0EvekFY3IP1Nt2DHu0re+V2ZHIpMkuWg==}
-    engines: {node: '>=8.6'}
     dev: true
 
   /picomatch/2.2.3:
@@ -3660,6 +3701,8 @@ packages:
       micromatch: 3.1.10
       minimist: 1.2.5
       walker: 1.0.7
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /sax/1.2.4:
@@ -3781,6 +3824,8 @@ packages:
       source-map: 0.5.7
       source-map-resolve: 0.5.3
       use: 3.1.1
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /source-map-resolve/0.5.3:
@@ -3971,8 +4016,8 @@ packages:
       ts-interface-checker: 0.1.13
     dev: true
 
-  /sucrase/3.18.1:
-    resolution: {integrity: sha512-TRyO38wwOPhLLlM8QLOG3TgMj0FKk+arlTrS9pRAanF8cAcHvgRPKIYWGO25mPSp/Rj87zMMTjFfkqIZGI6ZdA==}
+  /sucrase/3.21.0:
+    resolution: {integrity: sha512-FjAhMJjDcifARI7bZej0Bi1yekjWQHoEvWIXhLPwDhC6O4iZ5PtGb86WV56riW87hzpgB13wwBKO9vKAiWu5VQ==}
     engines: {node: '>=8'}
     hasBin: true
     dependencies:
