@@ -23,7 +23,7 @@
   "devDependencies": {
     "@egoist/prettier-config": "^0.1.0",
     "@rollup/plugin-commonjs": "^18.0.0",
-    "@rollup/plugin-node-resolve": "^11.2.1",
+    "@rollup/plugin-node-resolve": "13.3.0",
     "@rollup/plugin-sucrase": "^3.1.0",
     "@sucrase/jest-plugin": "^2.0.0",
     "@types/jest": "^26.0.20",
