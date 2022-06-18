@@ -43,6 +43,6 @@
     "vite": "^2.2.1"
   },
   "dependencies": {
-    "@vercel/nft": "^0.10.1"
+    "@vercel/nft": "^0.20.0"
   }
 }
