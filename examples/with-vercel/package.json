@@ -12,6 +12,7 @@
     "vite-plugin-mix": "link:../.."
   },
   "dependencies": {
-    "esbuild": "^0.14.50"
+    "got": "^12.2.0",
+    "ky": "^0.31.1"
   }
 }

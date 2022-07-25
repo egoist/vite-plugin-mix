@@ -1,11 +1,11 @@
 import { defineConfig } from 'vite';
-import * as mix from "vite-plugin-mix";
+import mix, { vercelAdapter } from "vite-plugin-mix";
 
 export default defineConfig({
   plugins: [
-    mix.default({
+    mix({
       handler: './handler.ts',
-      adapter: mix.vercelAdapter()
+      adapter: vercelAdapter()
     })
   ]
 });
