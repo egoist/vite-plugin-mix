@@ -30,6 +30,11 @@ const CONFIG_SERVERLESS_FUNCTION = JSON.stringify({
   launcherType: "Nodejs"
 });
 
+/** This allows ESM module to run in the serverless function. */
+const CONFIG_PACKAGE_JSON = JSON.stringify({
+  type: "module"
+});
+
 export const vercelAdapter = (): Adapter => {
   return {
     name: 'vercel',
@@ -61,6 +66,12 @@ export const vercelAdapter = (): Adapter => {
       await outputFile(
         path.join(functionDir, ".vc-config.json"),
         CONFIG_SERVERLESS_FUNCTION
+      );
+
+      // Add the `package.json` file.
+      await outputFile(
+        path.join(functionDir, "package.json"),
+        CONFIG_PACKAGE_JSON
       );
       
       // Get the dependencies.

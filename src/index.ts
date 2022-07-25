@@ -100,6 +100,10 @@ export default ({
               handler: handlerFile,
               ...adapter.rollupInput,
             },
+            output: {
+              /** Trick to support ESM on Vercel. */
+              format: adapter.name === "vercel" ? 'esm' : undefined
+            }
           },
         },
       })
