@@ -2,9 +2,11 @@ import sirv from 'sirv'
 import polka from 'polka'
 import { applyHandler } from './apply-handler'
 
-const server = polka()
+// Here, we use `VoidFunction` to prevent type errors.
+const assets = sirv(import.meta.env.MIX_CLIENT_DIR) as VoidFunction
 
-server.use(sirv(import.meta.env.MIX_CLIENT_DIR))
+const server = polka()
+server.use(assets)
 applyHandler(server)
 
 const { PORT = 3000 } = process.env
