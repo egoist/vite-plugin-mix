@@ -1,0 +1,17 @@
+{
+  "name": "with-vercel",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build"
+  },
+  "devDependencies": {
+    "typescript": "^4.7.4",
+    "vite": "2.9.14",
+    "vite-plugin-mix": "link:../.."
+  },
+  "dependencies": {
+    "esbuild": "^0.14.50"
+  }
+}
