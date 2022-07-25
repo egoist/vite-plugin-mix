@@ -1,7 +1,7 @@
 {
   "name": "vite-plugin-mix",
-  "version": "0.1.0",
-  "description": "My awesome typescript library",
+  "version": "0.3.1",
+  "description": "Adding backend API to your Vite app.",
   "publishConfig": {
     "access": "public"
   },
@@ -11,13 +11,10 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "build": "rollup -c",
-    "watch": "rollup -cw",
     "test": "jest",
-    "prepublishOnly": "npm run build",
-    "example": "vite example",
-    "build-example": "vite build example",
-    "start-example": "node example/build/server"
+    "watch": "rollup -cw",
+    "build": "rimraf dist && rollup -c",
+    "prepublishOnly": "npm run build"
   },
   "license": "MIT",
   "devDependencies": {
@@ -33,6 +30,7 @@
     "jest": "^26.6.3",
     "polka": "^0.5.2",
     "prettier": "^2.2.1",
+    "rimraf": "^3.0.2",
     "rollup": "^2.77.0",
     "rollup-plugin-ts": "^3.0.2",
     "sirv": "^2.0.2",
