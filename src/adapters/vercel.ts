@@ -8,7 +8,16 @@ import { copy, copyDir, moveFile, outputFile, mkdirp } from '../fs'
  * More informations on [the Vercel docs](https://vercel.com/docs/build-output-api/v3#build-output-configuration).
  */
 const CONFIG_OUTPUT_VERCEL = JSON.stringify({
-  version: 3
+  version: 3,
+  routes: [
+    {
+      handle: "filesystem"
+    },
+    {
+      src: "/(.*)",
+      dest: "/"
+    }
+  ]
 });
 
 /**
@@ -40,8 +49,8 @@ export const vercelAdapter = (): Adapter => {
         CONFIG_OUTPUT_VERCEL
       )
 
-      // Build Vercel serverless function called `render`.
-      const functionDir = path.join(vercelDir, 'functions/render.func')
+      // Build Vercel serverless function called.
+      const functionDir = path.join(vercelDir, 'functions/index.func')
       await copyDir(serverOutDir, functionDir)
       await moveFile( // Rename `render.js` to `index.js`
         path.join(functionDir, 'render.js'),
@@ -55,13 +64,15 @@ export const vercelAdapter = (): Adapter => {
       );
       
       // Get the dependencies.
-      const traceResult = await nodeFileTrace([
+      const { esmFileList, fileList } = await nodeFileTrace([
         path.join(functionDir, 'index.js'),
       ])
 
       // Add them to the serverless function's directory.
-      for (const file of traceResult.fileList) {
-        if (!file.includes('node_modules')) return;
+      const mergedFileLists = new Set([...esmFileList, ...fileList]);  
+      for (const file of mergedFileLists) {
+        if (!file.includes('node_modules')) continue;
+
         const outFile = path.join(functionDir, file)
         await copy(file, outFile)
       }
