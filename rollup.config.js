@@ -1,7 +1,7 @@
 import sucrase from '@rollup/plugin-sucrase'
 import nodeResolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
-import dts from 'rollup-plugin-dts'
+import ts from "rollup-plugin-ts";
 import pkg from './package.json'
 
 const tsTransform = sucrase({
@@ -29,7 +29,7 @@ const configs = [
       format: 'esm',
       dir: './dist',
     },
-    plugins: [dts()],
+    plugins: [ts()],
   },
   {
     input: ['./src/runtime/server.ts', './src/runtime/vercel-render.ts'],
