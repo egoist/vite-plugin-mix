@@ -3,4 +3,4 @@ node_modules
 dist
 *.log
 build/
-.vercel_build_output
+.vercel
