@@ -51,7 +51,7 @@ export default ({
           }
           server.handler(req as any, res)
         } catch (error) {
-          devServer.ssrFixStacktrace(error)
+          devServer.ssrFixStacktrace(error as Error)
           process.exitCode = 1
           next(error)
         }
@@ -59,11 +59,10 @@ export default ({
     },
 
     async writeBundle() {
-      if (process.env.MIX_SSR_BUILD) return
+      if (process.env.MIX_SSR_BUILD) return;
+      process.env.MIX_SSR_BUILD = 'true';
 
-      process.env.MIX_SSR_BUILD = 'true'
-
-      adapter = adapter || nodeAdapter()
+      adapter = adapter || nodeAdapter();
 
       const serverOutDir = path.join(root, 'build')
 
