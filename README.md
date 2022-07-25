@@ -48,6 +48,8 @@ export const handler: Handler = (req, res, next) => {
 
 The `handler` runs before serving static files, so you should make sure to call `next()` as a fallback. You can also use express-compatible middlewares in the handler.
 
+Also, if you're running into a 404, it will automatically rewrite/redirect to the `index.html` page. 
+
 To start developing, run the command `vite` as usual.
 
 To create a production build, run the command `vite build` as usual.
