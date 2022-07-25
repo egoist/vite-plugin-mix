@@ -13,6 +13,15 @@ const configs = [
   {
     input: './src/index.ts',
     output: {
+      format: 'esm',
+      dir: './dist',
+
+    },
+    plugins: [ts()],
+  },
+  {
+    input: './src/index.ts',
+    output: {
       format: 'cjs',
       dir: './dist',
       exports: 'named',
@@ -22,14 +31,6 @@ const configs = [
       ...Object.keys(pkg.dependencies || {}),
       ...Object.keys(pkg.peerDependencies || {}),
     ],
-  },
-  {
-    input: './src/index.ts',
-    output: {
-      format: 'esm',
-      dir: './dist',
-    },
-    plugins: [ts()],
   },
   {
     input: ['./src/runtime/server.ts', './src/runtime/vercel-render.ts'],
