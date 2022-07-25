@@ -15,7 +15,6 @@ const configs = [
     output: {
       format: 'esm',
       dir: './dist',
-
     },
     plugins: [ts()],
   },
