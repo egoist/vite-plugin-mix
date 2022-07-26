@@ -51,7 +51,7 @@ export default ({
           }
           server.handler(req as any, res)
         } catch (error) {
-          devServer.ssrFixStacktrace(error)
+          devServer.ssrFixStacktrace(error as Error)
           process.exitCode = 1
           next(error)
         }
@@ -59,11 +59,10 @@ export default ({
     },
 
     async writeBundle() {
-      if (process.env.MIX_SSR_BUILD) return
+      if (process.env.MIX_SSR_BUILD) return;
+      process.env.MIX_SSR_BUILD = 'true';
 
-      process.env.MIX_SSR_BUILD = 'true'
-
-      adapter = adapter || nodeAdapter()
+      adapter = adapter || nodeAdapter();
 
       const serverOutDir = path.join(root, 'build')
 
@@ -101,6 +100,19 @@ export default ({
               handler: handlerFile,
               ...adapter.rollupInput,
             },
+            output: {
+              /** Force output to ESM when using Vercel to support ESM and more. */
+              format: (() => {
+                const isVercel = adapter.name === 'vercel';
+                
+                // Check if the app is using ESM.
+                const packageJsonPath = path.join(root, 'package.json');
+                const pkg = fs.readFileSync(packageJsonPath, 'utf8');
+                const isEsm = JSON.parse(pkg)?.type === 'module';
+                
+                return (isEsm || isVercel) ? "esm" : "cjs";
+              })()
+            }
           },
         },
       })

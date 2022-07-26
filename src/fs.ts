@@ -6,8 +6,9 @@ export async function mkdirp(dir: string) {
   try {
     await fs.promises.mkdir(dir, { recursive: true })
   } catch (e) {
-    if (e.code === 'EEXIST') return
-    throw e
+    const error = e as NodeJS.ErrnoException;
+    if (error.code === 'EEXIST') return;
+    throw error;
   }
 }
 
@@ -40,6 +41,7 @@ export const outputFile = async (filepath: string, data: string | Buffer) => {
   await mkdirp(path.dirname(filepath))
   await fs.promises.writeFile(filepath, data)
 }
+
 export const moveFile = async (fromPath: string, toPath: string) => {
   await mkdirp(path.dirname(toPath))
   await fs.promises.copyFile(fromPath, toPath)

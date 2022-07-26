@@ -9,6 +9,12 @@
     "noUnusedLocals": true,
     "noImplicitAny": true,
     "allowJs": true,
-    "resolveJsonModule": true
-  }
+    "rootDir": "src",
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "declarationDir": "dist",
+    "resolveJsonModule": true,
+    "types": ["./types"]
+  },
+  "include": ["src"]
 }

@@ -48,6 +48,8 @@ export const handler: Handler = (req, res, next) => {
 
 The `handler` runs before serving static files, so you should make sure to call `next()` as a fallback. You can also use express-compatible middlewares in the handler.
 
+Also, if you're running into a 404, it will automatically rewrite/redirect to the `index.html` page. 
+
 To start developing, run the command `vite` as usual.
 
 To create a production build, run the command `vite build` as usual.
@@ -67,7 +69,11 @@ By default the server is built for Node.js target, you can run `node build/serve
 
 By default the server runs at port `3000`, you can switch to a custom port by using the `PORT` environment variable.
 
+You can see [a working example for Node.js here](/examples/with-node/) and another example for [ESM support here](/examples/with-node-esm/).
+
 ### Vercel
+
+This adapter uses Vercel's Build Output API (v3) which requires an Environment Variable named `ENABLE_VC_BUILD` to be set to `1` in order to enable the feature.
 
 To build for [Vercel](https://vercel.com), use the `vercelAdapter` in `vite.config.ts`:
 
@@ -86,6 +92,8 @@ export default defineConfig({
 ```
 
 Then you can run `vite build` to build for Vercel.
+
+You can see [a working example for Vercel here](/examples/with-vercel/).
 
 ## Guide
 
