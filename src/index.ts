@@ -101,8 +101,17 @@ export default ({
               ...adapter.rollupInput,
             },
             output: {
-              /** Trick to support ESM on Vercel. */
-              format: adapter.name === "vercel" ? 'esm' : undefined
+              /** Force output to ESM when using Vercel to support ESM and more. */
+              format: (() => {
+                const isVercel = adapter.name === 'vercel';
+                
+                // Check if the app is using ESM.
+                const packageJsonPath = path.join(root, 'package.json');
+                const pkg = fs.readFileSync(packageJsonPath, 'utf8');
+                const isEsm = JSON.parse(pkg)?.type === 'module';
+                
+                return (isEsm || isVercel) ? "esm" : "cjs";
+              })()
             }
           },
         },
