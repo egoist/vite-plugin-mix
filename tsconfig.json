@@ -10,7 +10,6 @@
     "noImplicitAny": true,
     "allowJs": true,
     "rootDir": "src",
-    "outDir": "dist",
     "declaration": true,
     "emitDeclarationOnly": true,
     "declarationDir": "dist",
