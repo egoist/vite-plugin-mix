@@ -1,0 +1,18 @@
+{
+  "name": "with-node",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "start": "node build/server.js",
+    "build": "tsc && vite build"
+  },
+  "devDependencies": {
+    "typescript": "^4.7.4",
+    "vite": "2.9.14",
+    "vite-plugin-mix": "link:../.."
+  },
+  "dependencies": {
+    "ky": "^0.31.1"
+  }
+}
