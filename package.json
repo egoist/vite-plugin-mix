@@ -40,7 +40,7 @@
     "vite": "3"
   },
   "peerDependencies": {
-    "vite": "^2.2.1"
+    "vite": "^3.1.4"
   },
   "dependencies": {
     "@vercel/nft": "^0.10.1"
