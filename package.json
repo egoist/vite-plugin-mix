@@ -15,6 +15,7 @@
     "watch": "rollup -cw",
     "test": "jest",
     "prepublishOnly": "npm run build",
+    "prepare": "npm run build",
     "example": "vite example",
     "build-example": "vite build example",
     "start-example": "node example/build/server"
