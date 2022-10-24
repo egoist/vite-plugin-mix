@@ -1,10 +1,9 @@
 import type { Handler } from 'vite-plugin-mix'
-import { transform } from 'esbuild'
+import { nanoid } from 'nanoid'
 
 export const handler: Handler = async (req, res, next) => {
-  if (req.path === '/foo') {
-    const result = await transform(`export const foo = 1`, { format: 'cjs' })
-    res.end(result.code)
+  if (req.path === '/id') {
+    res.end(nanoid())
     return
   }
   next()
