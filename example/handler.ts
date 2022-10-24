@@ -1,4 +1,4 @@
-import type { Handler } from '../'
+import type { Handler } from 'vite-plugin-mix'
 import { transform } from 'esbuild'
 
 export const handler: Handler = async (req, res, next) => {
