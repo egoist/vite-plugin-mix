@@ -12,7 +12,7 @@
   "types": "./dist/index.d.ts",
   "scripts": {
     "build": "rollup -c",
-    "watch": "rollup -cw",
+    "dev": "rollup -cw",
     "test": "jest",
     "prepublishOnly": "npm run build"
   },
