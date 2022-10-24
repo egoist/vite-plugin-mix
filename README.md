@@ -52,7 +52,7 @@ To start developing, run the command `vite` as usual.
 
 To create a production build, run the command `vite build` as usual.
 
-Now `vite build` will create a server build to `./build` folder alongside your regular client build which is the `./dist` folder by default. To run the production build as a Node.js server, run `node build/server.js`.
+Now `vite build` will create a server build to `./build` folder alongside your regular client build which is the `./dist` folder by default. To run the production build as a Node.js server, run `node build/server.mjs` or if you have `"type": "module"` in your `package.json`, run `node build/server.js` instead.
 
 ### Request flow
 
@@ -62,7 +62,7 @@ Now `vite build` will create a server build to `./build` folder alongside your r
 
 ### Node.js
 
-By default the server is built for Node.js target, you can run `node build/server.js` after `vite build` to start the production server.
+By default the server is built for Node.js target, you can run `node build/server.mjs` or `node build/server.js` after `vite build` to start the production server.
 
 By default the server runs at port `3000`, you can switch to a custom port by using the `PORT` environment variable.
 
