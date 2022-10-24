@@ -66,6 +66,30 @@ By default the server is built for Node.js target, you can run `node build/serve
 
 By default the server runs at port `3000`, you can switch to a custom port by using the `PORT` environment variable.
 
+### Vercel
+
+> **Warning**
+>
+> This may not work with some packages in a monorepo when using pnpm.
+
+To build for [Vercel](https://vercel.com), use the `vercelAdapter` in `vite.config.ts`:
+
+```ts
+import { defineConfig } from 'vite'
+import mix, { vercelAdapter } from 'vite-plugin-mix'
+
+export default defineConfig({
+  plugins: [
+    mix({
+      handler: './handler.ts',
+      adapter: vercelAdapter(),
+    }),
+  ],
+})
+```
+
+Then you can run `vite build` to build for Vercel.
+
 ## Guide
 
 ### Using Express
