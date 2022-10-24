@@ -5,7 +5,7 @@ import glob from 'tiny-glob'
 export async function mkdirp(dir: string) {
   try {
     await fs.promises.mkdir(dir, { recursive: true })
-  } catch (e) {
+  } catch (e: any) {
     if (e.code === 'EEXIST') return
     throw e
   }
@@ -45,3 +45,5 @@ export const moveFile = async (fromPath: string, toPath: string) => {
   await fs.promises.copyFile(fromPath, toPath)
   await fs.promises.unlink(fromPath)
 }
+
+export const existSync = fs.existsSync

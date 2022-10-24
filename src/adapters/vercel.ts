@@ -1,41 +1,53 @@
 import path from 'path'
 import { nodeFileTrace } from '@vercel/nft'
 import { Adapter } from '..'
-import { copy, copyDir, moveFile, outputFile } from '../fs'
+import { copy, copyDir, outputFile, existSync } from '../fs'
 
 export const vercelAdapter = (): Adapter => {
   return {
     name: 'vercel',
 
     rollupInput: {
-      render: path.join(__dirname, 'runtime/vercel-render.js'),
+      handler: path.join(__dirname, 'runtime/vercel-handler.js'),
     },
 
     async buildEnd({ root, serverOutDir, clientOutDir }) {
-      const vercelDir = path.join(root, '.vercel_build_output')
+      const vercelDir = path.join(root, '.vercel/output')
 
       await outputFile(
-        path.join(vercelDir, 'config/routes.json'),
-        JSON.stringify([
-          { handle: 'filesystem' },
-          {
-            src: '/(.*)',
-            dest: '/.vercel/functions/render',
-          },
-        ]),
+        path.join(vercelDir, 'config.json'),
+        JSON.stringify({
+          version: 3,
+          routes: [
+            { handle: 'filesystem' },
+            {
+              src: '/(.*)',
+              dest: '/handler',
+            },
+          ],
+        }),
       )
 
       // build vercel function
-      const functionDir = path.join(vercelDir, 'functions/node/render')
+      const functionDir = path.join(vercelDir, 'functions/handler.func')
       await copyDir(serverOutDir, functionDir)
-      await moveFile(
-        path.join(functionDir, 'render.js'),
-        path.join(functionDir, 'index.js'),
+
+      const handlerFilePath = existSync(path.join(functionDir, 'handler.js'))
+        ? path.join(functionDir, 'handler.js')
+        : path.join(functionDir, 'handler.mjs')
+      await outputFile(
+        path.join(functionDir, '.vc-config.json'),
+        JSON.stringify({
+          runtime: 'nodejs16.x',
+          handler: path.basename(handlerFilePath),
+          // maxDuration: 3,
+          launcherType: 'Nodejs',
+          // shouldAddHelpers: true,
+          // shouldAddSourcemapSupport: true,
+        }),
       )
 
-      const traceResult = await nodeFileTrace([
-        path.join(functionDir, 'index.js'),
-      ])
+      const traceResult = await nodeFileTrace([handlerFilePath])
 
       await Promise.all(
         traceResult.fileList.map(async (file) => {
