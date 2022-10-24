@@ -1,6 +1,6 @@
 {
   "name": "vite-plugin-mix",
-  "version": "0.0.0-semantic-release",
+  "version": "0.3.1",
   "description": "Adding backend API to your Vite app",
   "publishConfig": {
     "access": "public"
