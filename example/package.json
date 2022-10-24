@@ -1,0 +1,17 @@
+{
+  "private": true,
+  "name": "example",
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite",
+    "serve-function": "node ./serve-function.mjs"
+  },
+  "devDependencies": {
+    "vite": "^3.1.8",
+    "vite-plugin-mix": "workspace:*"
+  },
+  "dependencies": {
+    "nanoid": "^4.0.0",
+    "polka": "^0.5.2"
+  }
+}

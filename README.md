@@ -58,7 +58,6 @@ Now `vite build` will create a server build to `./build` folder alongside your r
 
 <img src="https://user-images.githubusercontent.com/8784712/116026214-d424af80-a684-11eb-9126-b188d7976be2.png" width="300" alt="request flow">
 
-
 ## Adapters
 
 ### Node.js
@@ -68,6 +67,10 @@ By default the server is built for Node.js target, you can run `node build/serve
 By default the server runs at port `3000`, you can switch to a custom port by using the `PORT` environment variable.
 
 ### Vercel
+
+> **Warning**
+>
+> This may not work with some packages in a monorepo when using pnpm.
 
 To build for [Vercel](https://vercel.com), use the `vercelAdapter` in `vite.config.ts`:
 
@@ -104,13 +107,12 @@ export const handler = app
 ```ts
 import polka from 'polka'
 
-
 export const handler = (req, res, next) => {
-   const app = polka({
-     onNoMatch: () => next()
-   })
-   
-   return app.handler(req, res)
+  const app = polka({
+    onNoMatch: () => next(),
+  })
+
+  return app.handler(req, res)
 }
 ```
 
