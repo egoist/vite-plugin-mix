@@ -47,3 +47,5 @@ export const moveFile = async (fromPath: string, toPath: string) => {
 }
 
 export const existSync = fs.existsSync
+
+export const removeSync = fs.rmSync

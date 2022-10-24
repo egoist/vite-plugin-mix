@@ -1,7 +1,7 @@
 import path from 'path'
 import { nodeFileTrace } from '@vercel/nft'
 import { Adapter } from '..'
-import { copy, copyDir, outputFile, existSync } from '../fs'
+import { copy, copyDir, outputFile, existSync, removeSync } from '../fs'
 
 export const vercelAdapter = (): Adapter => {
   return {
@@ -13,6 +13,7 @@ export const vercelAdapter = (): Adapter => {
 
     async buildEnd({ root, serverOutDir, clientOutDir }) {
       const vercelDir = path.join(root, '.vercel/output')
+      removeSync(vercelDir, { recursive: true, force: true })
 
       await outputFile(
         path.join(vercelDir, 'config.json'),
