@@ -39,8 +39,7 @@ export default ({
           const server = polka({
             onNoMatch: () => next(),
           })
-          server.use((req, res, next) => {
-            // @ts-expect-error
+          server.use((req: any, res: any, next: any) => {
             req.viteServer = devServer
             next()
           })
@@ -51,7 +50,7 @@ export default ({
           }
           server.handler(req as any, res)
         } catch (error) {
-          devServer.ssrFixStacktrace(error)
+          devServer.ssrFixStacktrace(error as Error)
           process.exitCode = 1
           next(error)
         }
